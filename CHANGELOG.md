@@ -2,7 +2,17 @@
 
 ## Unreleased
 
+## [0.4.0] (2022-03-04)
+
+### Changed
+
+- Bump requirement of Contao to ^4.9
+- Bump requirement of Symfony components to ^4.4 || ^5.1
+
 ### Fixed
+
+- Improve future compatibility by fixing deprecations (#20)
+- Add missing `itemReviewed` to the schema.org aggregateRating
 
 ## [0.3.5] (2020-11-20)
 
@@ -60,6 +70,7 @@
 - Deleting an elements sets the field `parentstatus` of the corresponding rating item to 'r' (removed).
 
 
+[0.4.0]: https://github.com/hofff/contao-rate-it/compare/0.3.5...0.4.0
 [0.3.5]: https://github.com/hofff/contao-rate-it/compare/0.3.4...0.3.5
 [0.3.4]: https://github.com/hofff/contao-rate-it/compare/0.3.3...0.3.4
 [0.3.3]: https://github.com/hofff/contao-rate-it/compare/0.3.2...0.3.3

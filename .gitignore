@@ -1,5 +1,6 @@
-/.project
-
+# Composer
 /vendor
-
 composer.lock
+
+# PHPCQ and related tools
+/.phpcq

@@ -18,9 +18,8 @@ namespace Hofff\Contao\RateIt\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use function func;
+
 use function is_array;
-use function var_dump;
 
 final class Configuration implements ConfigurationInterface
 {

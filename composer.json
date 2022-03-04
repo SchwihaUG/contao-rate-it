@@ -1,7 +1,8 @@
 {
   "name": "hofff/contao-rate-it",
-  "type": "contao-bundle",
   "description": "RateIt extension for the Contao Open Source CMS as contao 4 bundle",
+  "license": "LGPL-3.0-or-later",
+  "type": "contao-bundle",
   "keywords": [
     "contao",
     "rating",
@@ -9,8 +10,6 @@
     "bewertung",
     "bundle"
   ],
-  "homepage": "https://www.hofff.com",
-  "license": "LGPL-3.0-or-later",
   "authors": [
     {
       "name": "Nicky Hoff",
@@ -25,55 +24,60 @@
       "role": "Developer"
     }
   ],
+  "homepage": "https://www.hofff.com",
+  "support": {
+    "issues": "https://github.com/hofff/contao-rate-it/issues",
+    "source": "https://github.com/hofff/contao-rate-it"
+  },
   "require": {
-    "php": ">=7.1",
+    "php": "^7.1 || ^8.0",
     "ext-iconv": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pdo": "*",
     "ext-session": "*",
-    "contao/core-bundle": "^4.6",
+    "contao/core-bundle": "^4.9",
     "doctrine/dbal": "^2.5",
-    "symfony/config": "^3.4 || ^4.0",
-    "symfony/console": "^3.4 || ^4.0",
-    "symfony/dependency-injection": "^3.4.26 || ^4.1.12",
-    "symfony/http-foundation": "^3.4 || ^4.0",
-    "symfony/http-kernel": "^3.4 || ^4.0",
-    "symfony/security-core": "^3.4 || ^4.0",
-    "symfony/translation": "^3.4 || ^4.0"
-  },
-  "conflict": {
-    "contao/manager-plugin": "<2.0 || >=3.0",
-    "cgo-it/contao-rate-it-bundle": "*",
-    "cgo-it/contao-rate-it": "*",
-    "cgo-it/news4ward-rateit": "*"
+    "symfony/config": "^4.4 || ^5.1",
+    "symfony/console": "^4.4 || ^5.1",
+    "symfony/dependency-injection": "^4.4 || ^5.1",
+    "symfony/http-foundation": "^4.4 || ^5.1",
+    "symfony/http-kernel": "^4.4 || ^5.1",
+    "symfony/security-core": "^4.4 || ^5.1",
+    "symfony/translation-contracts": "^1.1 || ^2.0"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.0",
-    "php-http/guzzle6-adapter": "^1.1"
+    "phpcq/runner-bootstrap": "^1.0@dev"
   },
-  "config": {
-    "sort-packages": true
-  },
-  "extra": {
-    "contao": {
-      "runonce": [
-        "src/Resources/contao/runonce/create-initial-data.php"
-      ]
-    },
-    "contao-manager-plugin": "Hofff\\Contao\\RateIt\\ContaoManager\\Plugin",
-    "branch-alias": {
-      "dev-master": "0.3.x-dev",
-      "dev-develop": "0.4.x-dev"
-    }
+  "conflict": {
+    "cgo-it/contao-rate-it": "*",
+    "cgo-it/contao-rate-it-bundle": "*",
+    "cgo-it/news4ward-rateit": "*",
+    "contao/manager-plugin": "<2.0 || >=3.0"
   },
   "autoload": {
     "psr-4": {
       "Hofff\\Contao\\RateIt\\": "src/"
     }
   },
-  "support": {
-    "issues": "https://github.com/hofff/contao-rate-it/issues",
-    "source": "https://github.com/hofff/contao-rate-it"
+  "config": {
+    "allow-plugins": {
+      "contao-components/installer": false,
+      "contao/manager-plugin": true
+    },
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.5.x-dev",
+      "dev-master": "0.4.x-dev"
+    },
+    "contao": {
+      "runonce": [
+        "src/Resources/contao/runonce/create-initial-data.php"
+      ]
+    },
+    "contao-manager-plugin": "Hofff\\Contao\\RateIt\\ContaoManager\\Plugin"
   }
 }

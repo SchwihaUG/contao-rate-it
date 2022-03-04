@@ -74,12 +74,12 @@ final class CommentsTitleGenerator
                 $statement = $this->connection
                     ->prepare('SELECT * FROM tl_comments WHERE source=? AND parent=? LIMIT  0,1');
 
-                $statement->execute([$source, $sourceId]);
-                if ($statement->rowCount() === 0) {
+                $result = $statement->executeQuery([$source, $sourceId]);
+                if ($result->rowCount() === 0) {
                     return $title;
                 }
 
-                $row = $statement->fetch(PDO::FETCH_ASSOC);
+                $row = $result->fetchAssociative();
                 foreach ($GLOBALS['TL_HOOKS']['listComments'] as $callback) {
                     $callback[0] = System::importStatic($callback[0]);
 
@@ -92,9 +92,9 @@ final class CommentsTitleGenerator
                 return $title;
         }
 
-        $statement->execute([$sourceId]);
-        if ($statement->rowCount() === 1) {
-            $title .= ' - ' . $statement->fetchColumn(0);
+        $result = $statement->executeQuery([$sourceId]);
+        if ($result->rowCount() === 1) {
+            $title .= ' - ' . $result->fetchOne();
         }
 
         return $title;
@@ -125,13 +125,14 @@ final class CommentsTitleGenerator
         }
 
         $statement = $this->connection->prepare('SELECT ptable,pid FROM tl_content WHERE id=:id LIMIT 0,1');
-        $statement->execute(['id' => $sourceId]);
+        $result    = $statement->executeQuery(['id' => $sourceId]);
 
-        if ($statement->rowCount() === 0) {
+        if ($result->rowCount() === 0) {
             return;
         }
 
-        $source   = $statement->fetchColumn(0) ?: 'tl_article';
-        $sourceId = $statement->fetchColumn(1);
+        $row      = $result->fetchAssociative();
+        $source   = $row['ptable'] ?: 'tl_article';
+        $sourceId = $row['pid'];
     }
 }

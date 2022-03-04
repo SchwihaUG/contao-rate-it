@@ -18,6 +18,8 @@ namespace Hofff\Contao\RateIt\Console\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\ForwardCompatibility\Result as ForwardCompatibilityResult;
+use Doctrine\DBAL\Result;
 use Hofff\Contao\RateIt\Rating\RatingTypes;
 use PDO;
 use Symfony\Component\Console\Command\Command;
@@ -83,7 +85,7 @@ final class MigrateCommand extends Command
         $unratedPagesWithArticleRatings = $this->getUnratedPagesWithArticleRatings();
         $createdRatings = [];
 
-        while ($row = $unratedPagesWithArticleRatings->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $unratedPagesWithArticleRatings->fetchAssociative()) {
             $this->createRateItItem($row['pageId'], $input->getOption('position'));
         }
 
@@ -92,7 +94,8 @@ final class MigrateCommand extends Command
         return 0;
     }
 
-    private function getUnratedPagesWithArticleRatings() : Statement
+    /** @return Result|ForwardCompatibilityResult */
+    private function getUnratedPagesWithArticleRatings()
     {
         $sql = <<<'SQL'
 SELECT 

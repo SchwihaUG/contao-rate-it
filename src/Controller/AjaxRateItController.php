@@ -222,8 +222,8 @@ class AjaxRateItController
         $statement = $this->connection->prepare('SELECT id FROM tl_rateit_items WHERE rkey=:id and typ=:type');
         $statement->bindValue('id', $id);
         $statement->bindValue('type', $type);
-        $statement->execute();
+        $result = $statement->executeQuery();
 
-        return (int) $statement->fetch(PDO::FETCH_COLUMN);
+        return (int) $result->fetchOne();
     }
 }

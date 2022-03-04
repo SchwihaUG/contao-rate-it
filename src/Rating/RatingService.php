@@ -106,13 +106,13 @@ SQL;
         $statement = $this->connection->prepare(self::SQL_QUERY);
         $statement->bindValue('rkey', $rkey);
         $statement->bindValue('type', $typ);
-        $statement->execute();
+        $result = $statement->executeQuery();
 
-        if ($statement->rowCount() === 0) {
+        if ($result->rowCount() === 0) {
             return null;
         }
 
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $result->fetchAssociative();
     }
 
     private function maxStars() : int

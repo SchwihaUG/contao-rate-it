@@ -68,9 +68,9 @@ final class IsUserAllowedToRate
 
         $statement->bindValue('pid', $ratingId);
         $statement->bindValue('memberid', $userId);
-        $statement->execute();
+        $result = $statement->executeQuery();
 
-        return $statement->fetch(PDO::FETCH_COLUMN) > 0;
+        return $result->fetchOne() > 0;
     }
 
     private function hasAnonymousUserAlreadyRated(int $ratingId, string $sessionId) : bool
@@ -79,9 +79,9 @@ final class IsUserAllowedToRate
         $statement = $this->connection->prepare($query);
         $statement->bindValue('ratingId', $ratingId);
         $statement->bindValue('sessionId', $sessionId);
-        $statement->execute();
+        $result = $statement->executeQuery();
 
-        return $statement->fetch(PDO::FETCH_COLUMN) > 0;
+        return $result->fetchOne() > 0;
     }
 
     private function areDuplicatesAllowed() : bool

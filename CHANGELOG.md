@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.4.1] (2022-03-04)
+
+### Changed
+
+- Add doctrine/dbal ^3.0 compatibility
+
 ## [0.4.0] (2022-03-04)
 
 ### Changed

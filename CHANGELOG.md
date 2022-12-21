@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## [0.4.2] (2022-12-21)
+
+### Fixed
+
+ - Fix unparanthesized error with PHP 8.0
+ - Fix strict type errors
+
+
 ## [0.4.1] (2022-03-04)
 
 ### Changed

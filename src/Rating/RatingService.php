@@ -141,14 +141,14 @@ SQL;
         } else {
             $label       = count($labels) == 2
                 ? $labels[1]
-                : ($rating['totalRatings'] > 1 || $rating['totalRatings'] == 0 || ! $rating) ? $labels[2] : $labels[1];
+                : (($rating['totalRatings'] > 1 || $rating['totalRatings'] == 0 || ! $rating) ? $labels[2] : $labels[1]);
             $description = $template;
         }
         $actValue = $rating === false ? 0 : $rating['totalRatings'];
         $type     = $GLOBALS['TL_LANG']['rateit']['stars'];
 // 		return str_replace('.', ',', $stars)."/$this->intStars ".$type." ($actValue $label)";
-        $description = str_replace('%current%', str_replace('.', ',', $stars), $description);
-        $description = str_replace('%max%', $this->maxStars(), $description);
+        $description = str_replace('%current%', str_replace('.', ',', (string) $stars), $description);
+        $description = str_replace('%max%', (string) $this->maxStars(), $description);
         $description = str_replace('%type%', $type, $description);
         $description = str_replace('%count%', $actValue, $description);
         $description = preg_replace('/^(.*)(\[.*\])(.*)$/i', "\\1$label\\3", $description);

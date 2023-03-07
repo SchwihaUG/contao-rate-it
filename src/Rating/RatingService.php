@@ -28,18 +28,18 @@ final class RatingService
 {
     private const SQL_QUERY = <<<'SQL'
 
-SELECT 
-    i.id AS id,   
+SELECT
+    i.id AS id,
     i.rkey AS rkey,
     i.title AS title,
     IFNULL(AVG(r.rating),0) AS rating,
     COUNT( r.rating ) AS totalRatings
-FROM   
+FROM
     tl_rateit_items i
-LEFT OUTER JOIN 
+LEFT OUTER JOIN
     tl_rateit_ratings r
-    ON i.id = r.pid 
-WHERE 
+    ON i.id = r.pid
+WHERE
     i.rkey=:rkey and typ=:type and active='1'
 GROUP BY i.rkey, i.id, i.title;
 SQL;
@@ -87,7 +87,7 @@ SQL;
         return [
             'descriptionId' => sprintf('rateItRating-%s-description', $ratingTypeId),
             'description'   => $this->getStarMessage($template, $rating),
-            'id'            => sprintf('rateItRating-%s-%s-%s_%s', $ratingTypeId, $type, $stars, $maxStars),
+            'id'            => sprintf('rateItRating-%s-%s-%s_%s', (string) $ratingTypeId, $type, $stars, $maxStars),
             'class'         => 'rateItRating',
             'itemreviewed'  => $rating['title'],
             'actRating'     => $this->percentToStars($rating['rating']),
@@ -150,7 +150,7 @@ SQL;
         $description = str_replace('%current%', str_replace('.', ',', (string) $stars), $description);
         $description = str_replace('%max%', (string) $this->maxStars(), $description);
         $description = str_replace('%type%', $type, $description);
-        $description = str_replace('%count%', $actValue, $description);
+        $description = str_replace('%count%', (string) $actValue, $description);
         $description = preg_replace('/^(.*)(\[.*\])(.*)$/i', "\\1$label\\3", $description);
         return $description;
     }
